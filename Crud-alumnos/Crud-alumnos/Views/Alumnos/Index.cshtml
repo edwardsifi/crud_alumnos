@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Crud_alumnos.Models.AlumnoCE>
+
+@{
+    ViewBag.Title = "Lista de alumnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>lista de alumnos</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Agregar")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <!--Html.DisplayNameFor(model => model.Nombres)  agregar el arroba antes-->
+            Nombre completo
+        </th>
+        <th>
+            <!--Html.DisplayNameFor(model => model.Apellidos)-->
+            Apellido
+        </th>
+        <th>
+            <!--Html.DisplayNameFor(model => model.Edad)-->
+            Edad
+        </th>
+        <th>
+            <!--Html.DisplayNameFor(model => model.Sexo)-->
+            Sexo
+        </th>
+        <th>
+            Ciudad
+        </th>
+        <th>
+            <!--Html.DisplayNameFor(model => model.FechaRegistro)-->
+            Fecha Alta
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @{
+                    if (item.Sexo == "m")
+                    {
+                        <span>masculino</span>
+                    }
+                    else
+                    {
+
+                        <span>femenino</span>
+                    }
+
+
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                }
+            </td>
+            <td>
+                <!--Crud_alumnos.Controllers.AlumnosController.NombreCiudad(item.CodCiudad) poner arroba-->
+                @item.NombreCiudad
+            </td>
+            <td>
+                @item.FechaRegistro.ToString();
+
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Detallesalumno", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "EliminarAlumno", new { id = item.Id }, new { @class = "aElimina" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- poner arroba aqui section script{ -->
+<!--<script>
+
+    /*$(".aElimina").click(function (event) {
+
+        if (!confirm("estas seguro de eliminar?")) {
+
+            event.preventDefault();
+
+        }
+
+    });*/
+
+</script>-->
+
